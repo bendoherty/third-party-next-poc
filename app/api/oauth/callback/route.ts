@@ -2,6 +2,8 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
+
+    console.log("CALLBACK!");
     const { searchParams } = new URL(req.url);
     const code = searchParams.get('code');
     const error = searchParams.get('error');
