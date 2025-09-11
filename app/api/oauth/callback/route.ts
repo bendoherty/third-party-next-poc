@@ -34,8 +34,7 @@ export async function GET(req: NextRequest) {
                 },
             });
 
-        console.log('Token response:', tokenRes.data);
-        const { access_token } = tokenRes.data;
+        const { access_token } = tokenRes.data as { access_token: string; };
         const response = NextResponse.redirect(new URL('/', req.nextUrl));
         response.cookies.set('datasite_token', access_token, {
             path: '/',
@@ -45,7 +44,6 @@ export async function GET(req: NextRequest) {
         });
         return response;
     } catch (err) {
-        console.log("ERROR", err.response?.data || err.message);
         return new NextResponse('OAuth error', { status: 500 });
     }
 }
