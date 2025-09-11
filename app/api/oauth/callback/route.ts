@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
             path: '/',
             httpOnly: true,
             secure: true,
-            sameSite: 'lax',
+            sameSite: 'none',
         });
         return response;
     } catch (err) {
