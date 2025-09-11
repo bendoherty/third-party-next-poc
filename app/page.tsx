@@ -3,7 +3,9 @@
 import { cookies } from "next/headers";
 import ProjectList from "./components/ProjectList";
 
-function getUserFromToken(token: string | undefined) {
+async function getUserFromToken() {
+  const token = (await cookies()).get("datasite_token")?.value;
+
   if (!token) return null;
   try {
     // JWT tokens are base64 encoded: header.payload.signature
@@ -19,8 +21,7 @@ function getUserFromToken(token: string | undefined) {
 }
 
 export default async function Home() {
-  const token = cookies().get("datasite_token")?.value;
-  const user = getUserFromToken(token);
+  const user = await getUserFromToken();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white font-sans">
@@ -37,7 +38,7 @@ export default async function Home() {
         <p className="text-lg text-gray-200 mb-8 text-center">
           What project would you like to work on today?
         </p>
-        <ProjectList token={token} />
+        <ProjectList />
       </div>
     </div>
   );
