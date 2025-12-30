@@ -12,7 +12,7 @@ function getIdFromJwt(token: string): string | null {
     }
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
 
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
